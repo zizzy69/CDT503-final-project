@@ -1,0 +1,52 @@
+[
+  {
+    "question": "What are the three main stages in the Northstar Notes pipeline?",
+    "ground_truth": "The three stages are ingest, retrieve, and generate.",
+    "source": "demo_rag_handbook.pdf"
+  },
+  {
+    "question": "What is the default top-k value in the Northstar Notes handbook?",
+    "ground_truth": "The default top-k value is 4.",
+    "source": "demo_rag_handbook.pdf"
+  },
+  {
+    "question": "What chunk overlap does Northstar Notes use?",
+    "ground_truth": "Northstar Notes uses an 80-character chunk overlap.",
+    "source": "demo_rag_handbook.pdf"
+  },
+  {
+    "question": "What is the maximum payload of Rover-6?",
+    "ground_truth": "Rover-6 has a maximum payload of 18 kilograms.",
+    "source": "demo_campus_robot.pdf"
+  },
+  {
+    "question": "Which sensor must be checked before Rover-6 moves autonomously?",
+    "ground_truth": "The lidar status must be checked before autonomous movement.",
+    "source": "demo_campus_robot.pdf"
+  },
+  {
+    "question": "How far from a person must Rover-6 stop?",
+    "ground_truth": "Rover-6 must stop when a person is within 1.2 meters.",
+    "source": "demo_campus_robot.pdf"
+  },
+  {
+    "question": "What are the weights of context recall and answer relevancy in the Meridian policy?",
+    "ground_truth": "Context recall has a 60 percent weight and answer relevancy has a 40 percent weight.",
+    "source": "demo_research_policy.pdf"
+  },
+  {
+    "question": "What is the minimum answer relevancy target?",
+    "ground_truth": "The minimum answer relevancy target is 0.70.",
+    "source": "demo_research_policy.pdf"
+  },
+  {
+    "question": "Which chunk sizes must be compared in the Meridian Lab experiment?",
+    "ground_truth": "The experiment must compare chunk_size 512 and chunk_size 1024.",
+    "source": "demo_research_policy.pdf"
+  },
+  {
+    "question": "Who won the 2025 campus robotics championship?",
+    "ground_truth": "The demo documents do not contain this information, so it cannot be confirmed from the provided context.",
+    "source": "not_in_documents"
+  }
+]

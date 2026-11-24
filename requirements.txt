@@ -1,0 +1,81 @@
+# CDT503 Track-B: 本地 PDF RAG 问答系统
+#
+# 依赖说明：
+# 1) 本文件只声明第一阶段的项目依赖，不包含任何 OpenAI SDK 或 OpenAI API 依赖。
+# 2) 版本使用“最低兼容版本”而不是完全锁死版本，便于在有 NVIDIA CUDA 的机器上
+#    根据本机 CUDA/PyTorch 组合安装；项目稳定后可再生成 requirements-lock.txt。
+# 3) Windows + NVIDIA GPU 用户通常需要先按 PyTorch 官网的 CUDA 安装命令安装 torch，
+#    再执行本文件；CPU 环境使用代码中的 Qwen2.5-1.5B fallback 完成功能开发和演示。
+# 4) bitsandbytes 用于 Transformers 的 4-bit 量化配置；真正启用 4-bit 会在后续
+#    generation 模块中通过 BitsAndBytesConfig(load_in_4bit=True) 完成。
+
+# ------------------------------
+# LangChain 编排层
+# ------------------------------
+# langchain：提供 Runnable、提示词、检索链等核心抽象。
+langchain>=0.3.0
+# LangChain 的通用文档加载器、文本切分器及社区集成。
+langchain-community>=0.3.0
+# 本地 Hugging Face embedding/LLM 的 LangChain 适配器；不依赖 OpenAI API。
+langchain-huggingface>=0.1.0
+# Chroma 的独立 LangChain 集成包；后续代码使用本地持久化 Chroma。
+langchain-chroma>=0.1.4
+# 独立的递归文本切分器包；ingest.py 直接从此包导入。
+langchain-text-splitters>=0.3.0
+
+# ------------------------------
+# 本地文档解析与向量数据库
+# ------------------------------
+# PDF 文本提取；第一阶段先保留 pypdf，后续可按扫描件需求增加 OCR。
+pypdf>=5.0.0
+# 可选的高兼容 PDF 解析后端，便于处理复杂排版或文本提取异常的 PDF。
+pymupdf>=1.24.0
+# 向量库本体；数据默认写入项目内的 vector_store/chroma/。
+chromadb>=0.5.0
+
+# ------------------------------
+# BGE-small 向量 embedding
+# ------------------------------
+# 用于加载 BAAI/bge-small-zh-v1.5 或同等 BGE-small 本地模型。
+sentence-transformers>=3.0.0
+# Hugging Face 模型下载、缓存和本地模型加载支持。
+huggingface-hub>=0.24.0
+
+# ------------------------------
+# Qwen 本地推理：GPU 使用 7B 4-bit，CPU 使用 1.5B fallback
+# ------------------------------
+# 深度学习运行时；GPU 用户需按 CUDA 版本选择合适的 PyTorch wheel。
+torch>=2.4.0
+# AutoTokenizer、AutoModelForCausalLM、BitsAndBytesConfig 等核心 API。
+transformers>=4.45.0
+# 支持 device_map="auto" 及大模型设备调度。
+accelerate>=0.34.0
+# GPU 模式的 4-bit/8-bit 量化后端；CPU 模式不会调用此后端。
+bitsandbytes>=0.43.0
+# 更安全高效的模型权重序列化格式支持。
+safetensors>=0.4.0
+
+# ------------------------------
+# 本地配置、界面与开发质量
+# ------------------------------
+# 从 .env 读取本地路径、模型名和运行参数；不得把密钥写入代码。
+python-dotenv>=1.0.1
+# 最终演示可选的本地交互界面；仅作为本地 UI，不调用 OpenAI API。
+gradio>=5.0.0
+# 进度显示，供文档导入和批量建库阶段使用。
+tqdm>=4.66.0
+# 测试框架；后续用于验证解析、切分、检索和答案生成。
+pytest>=8.0.0
+# 静态检查与格式化；不影响运行时逻辑。
+ruff>=0.6.0
+# RAGAS 评估 context_recall 和 answer_relevancy；评估器使用本地模型适配器。
+ragas>=0.4.3
+# 保存评估柱状图；使用 Agg 后端，不要求桌面 GUI。
+matplotlib>=3.8.0
+
+# ------------------------------
+# 明确排除项（仅作项目约束记录，不要取消注释）
+# ------------------------------
+# openai
+# langchain-openai
+# 以上依赖不应加入本项目，因为用户要求禁止 OpenAI API 调用。

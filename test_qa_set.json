@@ -1,0 +1,22 @@
+[
+    {
+        "question": "What main topics are covered in this document?",
+        "ground_truth": "The document introduces RAG technology and core modules for retrieval‑augmented generation."
+    },
+    {
+        "question": "What is the function of RecursiveCharacterTextSplitter?",
+        "ground_truth": "It splits long documents into smaller text chunks for vector database storage."
+    },
+    {
+        "question": "What embedding model is used in this project?",
+        "ground_truth": "BGE‑small embedding model is used to convert text into vector representation."
+    },
+    {
+        "question": "What problem can RAG mitigate for large language models?",
+        "ground_truth": "RAG can mitigate the hallucination problem of large language models."
+    },
+    {
+        "question": "What vector database is adopted in this project?",
+        "ground_truth": "Chroma is used as the lightweight local vector database."
+    }
+]
